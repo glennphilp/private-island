@@ -1,0 +1,22 @@
+$breakpoints: (
+  xs: 32rem, // ~512px
+  sm: 48rem, // ~768px
+  md: 64rem, // ~1024px
+  lg: 80rem, // ~1280px
+  xl: 90rem  // ~1440px
+) !default;
+
+@mixin breakpoint($breakpoint, $logic: false) {
+  @if( $logic ) {
+    @media #{$logic} and (min-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
+  } @else {
+    @media (min-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
+  }
+}
+
+// Build out a mixin for prefers color scheme light/dark
+// @media (prefers-color-scheme: dark) {}
+
+// Build out a mixin for min/max-aspect-ratio
+// @media (min-aspect-ratio: 8/5) {}
+// @media (max-aspect-ratio: 3/2) {}

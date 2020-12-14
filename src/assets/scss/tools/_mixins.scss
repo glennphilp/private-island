@@ -1,0 +1,29 @@
+
+// TYPOGRAPHY
+// Font-Smoothing
+@mixin fontSmooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+// SHADOWS
+// Inner Shadow
+@mixin inner-side-shadow(
+  $side: bottom,
+  $size: 20px,
+  $color: rgba($black, 0.25)
+) {
+
+  $helper: round($size * 0.65);
+
+  @if ($side == top) {
+    box-shadow: inset 0 $helper $size (-1)*$helper $color;
+  } @else if ($side == left) {
+    box-shadow: inset $helper 0 $size (-1)*$helper $color;
+  } @else if ($side == right) {
+    box-shadow: inset (-1)*$helper 0 $size (-1)*$helper $color;
+  } @else if ($side == bottom) {
+    box-shadow: inset 0 (-1)*$helper $size (-1)*$helper $color;
+  }
+}

@@ -1,0 +1,32 @@
+.toggler {
+  // .toggler--theme
+  &--theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border: 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      height: calc(30px - 10px);
+      width: calc(30px - 10px);
+      border-radius: 50%;
+    }
+    
+    &::after {
+      background-color: hsl(0%, 0%, 0);
+      clip-path: ellipse(55% 100% at 8% 50%);
+    }
+    
+    &::before {
+      border: 1px solid;
+    }
+  } // @end .toggler--theme
+} // @end .toggler

@@ -1,0 +1,62 @@
+
+@mixin ph-grid-masonry() {
+  .grid {
+    --gap: 1em;
+    --columns: 3;
+
+    // .grid--masonry
+    &--masonry {
+      gap: var(--gap);
+      
+      @supports(display: grid) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      @supports(grid-template-rows: masonry) {
+        // grid-auto-flow: dense;
+        grid-template-rows: masonry;
+      }
+
+      @if $fallback {
+        display: column;
+        columns: var(--columns);
+      }
+
+      // .grid--masonry > *
+      > * {
+        @if $fallback {
+          break-inside: avoid;
+          margin-bottom: var(--gap);
+        }
+      }
+
+      .span--\@2 {
+        grid-column: span 2;
+      }
+
+      .span--\@3 {
+        grid-column: span 3;
+      }
+
+      .span--\@4 {
+        grid-column: span 4;
+      }
+    } // @end .grid--masonry
+  } // @end .grid
+}
+
+img {
+  max-width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+
+  // .card__media
+  &__media {
+    
+  }
+}

@@ -1,0 +1,11 @@
+$fallback: true;
+
+@import 'global/type';
+@import 'components/masonry';
+
+@include ph-global-styles;
+@include ph-grid-masonry;
+
+body {
+  min-height: 100vh;
+}

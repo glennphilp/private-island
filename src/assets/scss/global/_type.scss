@@ -1,0 +1,10 @@
+@mixin ph-global-styles {
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    font-size: 100%;
+    font-family: 'Mulish', sans-serif;
+  }
+}

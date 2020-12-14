@@ -1,0 +1,14 @@
+$fallback: false;
+
+@import 'global/shared';
+@import 'global/type';
+@import 'components/buttons';
+@import 'components/masonry';
+
+@include ph-shared;
+@include ph-global-styles;
+@include ph-grid-masonry;
+
+body {
+  min-height: 100vh;
+}
