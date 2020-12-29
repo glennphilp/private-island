@@ -1,13 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="default">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{root}}_css/app.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,400;0,700;0,900;1,200;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{root}}_css/app.css" inline>
   <title>{{browser-title}}</title>
 </head>
 <body>
-  <!-- Blog Template -->
-  {{> body}}
+  <ul>
+    <li><a href="#main" class="show-on-focus">Skip to content</a></li>
+    <li><a href="#main" class="show-on-focus">Skip to navigation</a></li>
+  </ul>
+  <div id="app" class="app">
+    {{> app-header}}
+    {{> app-nav}}
+    <div id="app_main" class="app__main">
+      <main id="main" class="main">
+        {{> body}}
+        <aside class="main__aside">
+
+        </aside><!-- @end main__aside -->
+        <footer class="main__footer">
+
+        </footer><!-- @end main__footer -->
+      </main><!-- @end main -->
+    </div><!-- @end app__main -->
+    {{> app-footer}}
+  </div>
+  <script src="{{root}}_js/.app.js"></script>
+  <script>
+    let dark_mode = localStorage.getItem('dark_mode');
+
+    // Outputs the users device preferences
+    const LIGHT = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const DARK = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const dark_mode_toggle = document.querySelector('#toggle_mode')
+
+    // check if dark mode is enabled
+    // if enabled, turn it off
+    // if disabled, turn it on
+
+    const enable_dark_mode = () => {
+      // 1. Add the class dark mode to the body
+      document.body.classList.add('darkmode');
+      // 2. update dark mode in the localStorage
+      localStorage.setItem('dark_mode', 'enabled');
+    }
+
+    const disable_dark_mode = () => {
+      // 1. Add the class dark mode to the body
+      document.body.classList.remove('darkmode');
+      // 2. update dark mode in the localStorage
+      localStorage.setItem('dark_mode', null);
+    }
+
+    if (dark_mode === 'enabled') {
+      enable_dark_mode();
+    }
+
+    dark_mode_toggle.addEventListener('click', () => {
+      dark_mode = localStorage.getItem('dark_mode');
+
+      if (dark_mode !== 'enabled') {
+        enable_dark_mode();
+      } else {
+        disable_dark_mode();
+      }
+    });
+  </script>
 </body>
 </html>

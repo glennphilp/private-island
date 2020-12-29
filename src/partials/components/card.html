@@ -1,0 +1,22 @@
+<div class="card {{classes}}">
+  <div class="card__media">
+    {{#if post.image}}
+    <img src="{{post.image}}" alt="{{post.img_alt}}">
+    {{else}}
+    <img src="https://picsum.photos/400/300.webp" alt="Random placeholder image provided by PicSum">
+    {{/if}}
+  </div>
+  {{#if post.title}}
+  <div class="card__header">
+    <h2>{{post.title}}</h2>
+    {{#if post.sub_title}}
+    <p>{{post.sub_title}}</p>
+    {{/if}}
+  </div>
+  {{/if}}
+  {{#if post.teaser}}
+  <div class="card__content">
+    <p>{{post.teaser}}</p>
+  </div>
+  {{/if}}
+</div>

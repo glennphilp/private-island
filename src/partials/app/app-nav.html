@@ -1,0 +1,13 @@
+<nav id="app_nav" class="app__nav">
+  <ul class="menu">
+    {{#ifpage 'index'}}
+    <li class="menu__item active"><a class="menu__link" href="/" aria-label="Reload">Home</a></li>
+    {{/ifpage}}
+    {{#unlesspage 'index'}}
+    <li class="menu__item"><a class="menu__link" href="/">Home</a></li>
+    {{/unlesspage}}
+    {{#each global.nav-page}}
+      <li class="menu__item{{#ifpage page}} active{{/ifpage}}"><a class="menu__link" href="{{root}}{{url}}">{{label}}</a></li>
+    {{/each}}
+  </ul>
+</nav><!-- @end app_nav app__nav -->

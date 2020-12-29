@@ -15,11 +15,7 @@
   </ul>
   <div id="app" class="app">
     {{> app-header}}
-    <ul>
-    {{#each app-nav}}
-      <li><a href="{{root}}{{url}}">{{label}}</a></li>
-    {{/each}}
-    </ul>
+    {{> app-nav}}
     <div id="app_main" class="app__main">
       <main id="main" class="main">
         {{> body}}
@@ -33,14 +29,14 @@
     </div><!-- @end app__main -->
     {{> app-footer}}
   </div>
-  <script src="{{root}}_js/.app.js"></script>
+  <script src="{{root}}_js/app.js"></script>
   <script>
     let dark_mode = localStorage.getItem('dark_mode');
-    
+
     // Outputs the users device preferences
     const LIGHT = window.matchMedia('(prefers-color-scheme: light)').matches;
     const DARK = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
+
     const dark_mode_toggle = document.querySelector('#toggle_mode')
 
     // check if dark mode is enabled
