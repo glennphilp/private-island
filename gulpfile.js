@@ -17,8 +17,8 @@ const $ = plugins();
 // Check for --production flag
 const PRODUCTION = !!(yargs.argv.production);
 
-gulp.task('default', gulp.series(clean, gulp.parallel(html, style, images), server, watch));
-gulp.task('build', gulp.series(clean, gulp.parallel(html, style, images), inline_src, server))
+gulp.task('default', gulp.series(clean, gulp.parallel(html, style, javascript, images, fonts), server, watch));
+gulp.task('build', gulp.series(clean, gulp.parallel(html, style, javascript, images, fonts), inline_src, server))
 
 // Clean dist
 function clean(done) {
@@ -84,6 +84,20 @@ function inline_src() {
 }
 
 // Compile JavaScript
+function javascript() {
+  return gulp.src('./src/assets/js/**/*.js')
+  .pipe($.babel({
+    presets: ['@babel/preset-env']
+  }))
+
+  .pipe($.sourcemaps.init())
+  .pipe($.babel({
+    presets: ['@babel/preset-env']
+  }))
+  .pipe($.sourcemaps.write('.'))
+  .pipe($.if(!PRODUCTION, gulp.dest('./dev/_js')))
+  .pipe($.if(PRODUCTION, gulp.dest('./prd/_js')));
+}
 
 
 // Optimizing Images
@@ -106,14 +120,23 @@ function images(done) {
   done();
 }
 
+function fonts() {
+  return gulp.src('./src/assets/fonts/**/*')
+      .pipe($.if(!PRODUCTION, gulp.dest('./dev/_font')))
+      .pipe($.if(PRODUCTION, gulp.dest('./prd/_font')));
+}
+
 function server(done) {
   browser.init({
     browser: "firefox",
     server: {
       baseDir: './dev'
     },
-    port: 12484
-    
+    port: 12484,
+    ui: {
+      port: 15989
+    }
+
     // proxy: "http://swlxprddb1edu.swmed.edu/",
     // serveStatic: [{
     //   route: ['/css', '/js'],
@@ -137,14 +160,17 @@ function reload(done) {
 
 function watch() {
   gulp.watch('./src/assets/scss/**/*.scss').on('all', style);
-  gulp.watch('./src/assets/js/**/*.js').on('all', browser.reload);
+  gulp.watch('./src/assets/js/**/*.js').on('all', gulp.series(reload, javascript, browser.reload));
   gulp.watch('./src/assets/images/**/*').on('all', gulp.series(reload, images, browser.reload));
+  gulp.watch('./src/assets/fonts/**/*').on('all', gulp.series(reload, fonts, browser.reload));
   gulp.watch('src/{layouts,partials,data,pages}/**/*.{html, json, jsonp, txt}').on('all', gulp.series(reload, html, browser.reload));
 }
 
 exports.html = html;
 exports.style = style;
+exports.javascript = javascript;
 exports.images = images;
+exports.fonts = fonts;
 exports.server = server;
 exports.watch = watch;
 exports.inline_src = inline_src;
