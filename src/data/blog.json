@@ -1,0 +1,20 @@
+{
+  "posts": [
+    {
+      "url": "/blog/welcome.html",
+      "title": "Welcome to my first post",
+      "image": "https://picsum.photos/id/1051/400/300.webp?blur"
+    },
+    {
+      "url": "/blog/second.html",
+      "title": "This would be my second post",
+      "teaser": "A short intro to grab your attention if the title failed",
+      "image": "_img/sound-board.jpg",
+      "img_alt": "Image of a sounds board"
+    },
+    {
+      "url": "/blog/another.html",
+      "title": "Another Card Title"
+    }
+  ]
+}

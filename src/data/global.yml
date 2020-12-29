@@ -1,0 +1,9 @@
+nav-page:
+-
+  label: Blog
+  page: 'blog'
+  url: /blog/
+-
+  label: Playground
+  page: 'playground'
+  url: /playground.html
