@@ -1,10 +1,21 @@
 @mixin ph-global-styles {
+
+  @font-face {
+    font-family: "Megona";
+    src:  url("/_font/Megona.otf") format("otf"),
+          url("/_font/Megona.ttf") format("truetype");
+  }
+
   html {
     font-size: 16px;
   }
-  
+
   body {
     font-size: 100%;
     font-family: 'Mulish', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Megona', serif;
   }
 }
